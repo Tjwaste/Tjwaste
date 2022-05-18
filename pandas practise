@@ -1,0 +1,103 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled5.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyMt5JBlFPP4UubQ1WrpG3+c",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Tjwaste/Tjwaste/blob/main/pandas%20practise\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "2YizQXa6iui6"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "df = pd.read_csv('Films v3.csv')\n",
+        "subjects=['Action', 'Adventure', 'Comedy', 'Crime', 'Drama', 'Fantasy', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'Short', 'War', 'Western', 'Westerns']\n",
+        "#Ask user to choose a film subject (e.g “Horror”) and display a list of all the films featuring this subject\n",
+        "a = True\n",
+        "print('##################################')\n",
+        "print('Action')\n",
+        "print('Adventure')\n",
+        "print('Comedy')\n",
+        "print('Crime')\n",
+        "print('Drama')\n",
+        "print('Fantasy')\n",
+        "print('Horror')\n",
+        "print('Music')\n",
+        "print('Mystery')\n",
+        "print('Romance')\n",
+        "print('Science Fiction')\n",
+        "print('Short')\n",
+        "print('War')\n",
+        "print('Western')\n",
+        "print('Westerns')\n",
+        "print('##################################')\n",
+        "while a == True:\n",
+        "    genre = input('input a genre from the list: ')\n",
+        "    if genre not in subjects:\n",
+        "        print('invalid')\n",
+        "    else:\n",
+        "        print('######################')\n",
+        "        print('#DISPLAYING WAR FILMS#')\n",
+        "        print('######################')\n",
+        "        films = df.loc[df['Subject']== genre ]\n",
+        "        films = films.drop(columns=['Subject'])\n",
+        "        print(films)\n",
+        "        a = False\n",
+        "#Display a list of all films starring Connery (or another Actor?)\n",
+        "print('###########################')\n",
+        "print('#DISPLAYING CONNERY FILMS!#')\n",
+        "print('###########################')\n",
+        "conery = df.loc[df['Actor'] == 'Connery']\n",
+        "conery = conery.drop(columns=['Actor'])\n",
+        "print(conery)\n",
+        "#What is the length (in minutes) of the film Goldfinger?\n",
+        "print('#########################')\n",
+        "print('# DISPLAYING GOLDFINGER #')\n",
+        "print('#########################')\n",
+        "jb = df.loc[df['Title'] == 'Goldfinger']\n",
+        "jb = jb.drop(columns=['Year', 'Subject', 'Actor'])\n",
+        "print(jb)\n",
+        "#Display the total running time of films by each subject (using groupby)\n",
+        "print('###########################################################')\n",
+        "print('# DISPLAYING THE TOTAL LENGTH OF ALL MOVIES IN EACH GENRE #')\n",
+        "print('###########################################################')\n",
+        "time = df.groupby(['Subject']).sum()\n",
+        "time = time.drop(columns=['Year'])\n",
+        "print(time)\n",
+        "#List all films shown in the 1980s\n",
+        "print('##########################################')\n",
+        "print('# DISPLAYING ALL THE MOVIES FROM THE 80s #')\n",
+        "print('##########################################')\n",
+        "oldmovies = df.loc[(df['Year'] > 1980) & (df['Year'] < 1990)] \n",
+        "print(oldmovies)\n"
+      ]
+    }
+  ]
+}
